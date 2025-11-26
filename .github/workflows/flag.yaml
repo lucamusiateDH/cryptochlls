@@ -1,0 +1,24 @@
+name: Print Flag
+
+on:
+  workflow_dispatch:  # Run manually from GitHub
+
+jobs:
+  print_flag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install requests pycryptodome
+
+      - name: Run script
+        env:
+          FLAG: ${{ secrets.CHALLENGE_FLAG }}
+        run: python script.py
