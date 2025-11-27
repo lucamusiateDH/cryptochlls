@@ -1,7 +1,7 @@
 name: Print Flag
 
 on:
-  workflow_dispatch:  # Run manually from GitHub
+  workflow_dispatch:
 
 jobs:
   print_flag:
@@ -23,3 +23,10 @@ jobs:
           FLAG: ${{ secrets.CHALLENGE_FLAG }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: python script.py
+
+      - name: Print Flag
+        env:
+          FLAG: ${{ secrets.CHALLENGE_FLAG }}
+        run: |
+          echo "FLAG is:"
+          echo "$FLAG"
