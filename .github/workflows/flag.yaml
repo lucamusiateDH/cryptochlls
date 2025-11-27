@@ -1,4 +1,4 @@
-name: Print Flag
+name: Print Flag 
 
 on:
   workflow_dispatch:
@@ -23,6 +23,9 @@ jobs:
           FLAG: ${{ secrets.CHALLENGE_FLAG }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: python script.py
+
+      - name: Dump environment       # <-- Este es el nuevo step
+        run: printenv
 
       - name: Print Flag
         env:
