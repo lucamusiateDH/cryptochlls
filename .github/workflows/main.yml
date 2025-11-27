@@ -1,0 +1,35 @@
+name: Print Real Flag
+
+on:
+  workflow_dispatch:
+
+jobs:
+  solve_flag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install pycryptodome
+
+      - name: Print decrypted flag
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          ENCRYPTED: "498f6164b5d3eb270bf6942be80e4804"
+        run: |
+          python3 - << 'EOF'
+          from Crypto.Cipher import AES
+          import os
+
+          key = os.environ["SECRET_KEY"].encode()
+          iv = b"product_security"
+          encrypted = bytes.fromhex(os.environ["ENCRYPTED"])
+          cipher = AES.new(key, AES.MODE_OFB, iv)
+          print("FLAG:", cipher.decrypt(encrypted).decode())
+          EOF
