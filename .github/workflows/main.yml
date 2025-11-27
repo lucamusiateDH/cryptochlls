@@ -21,7 +21,7 @@ jobs:
       - name: Print decrypted flag
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          ENCRYPTED: "498f6164b5d3eb270bf6942be80e4804"
+          ENCRYPTED: "0bffd3591cb7644e8f94c567f5504819757323400c57f51bafe4075ea0dcfd093f70c0a9cdf53cb9834d49"
         run: |
           python3 - << 'EOF'
           from Crypto.Cipher import AES
